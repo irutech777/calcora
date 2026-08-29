@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Typography ---- */
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* ---- Brand palette ----
+     Signal Blue: primary actions & links
+     Signal Green: the calculator's "LCD" result color
+     Ink: near-black navy for text/surfaces, not pure black
+  */
+  --color-ink-950: #0a0e17;
+  --color-ink-900: #0f1622;
+  --color-ink-800: #161f2e;
+  --color-ink-700: #212c3d;
+  --color-ink-600: #38455a;
+  --color-ink-500: #5b6b82;
+  --color-ink-400: #8896a8;
+  --color-ink-300: #b7c1cf;
+  --color-ink-200: #dde2e8;
+  --color-ink-100: #eef1f5;
+  --color-ink-50: #f7f8fa;
+
+  --color-signal-700: #1638c9;
+  --color-signal-600: #2454ff;
+  --color-signal-500: #3f6bff;
+  --color-signal-400: #7896ff;
+  --color-signal-100: #e5ebff;
+
+  --color-lcd-600: #00a878;
+  --color-lcd-500: #00c896;
+  --color-lcd-400: #4fe0bb;
+  --color-lcd-100: #d9fbef;
+
+  --color-amber-500: #f5a524;
+  --color-rose-500: #f04a5e;
+
+  --radius-card: 1.1rem;
+}
+
+:root {
+  color-scheme: light;
+  --bg: var(--color-ink-50);
+  --surface: #ffffff;
+  --surface-2: var(--color-ink-100);
+  --text: var(--color-ink-900);
+  --text-muted: var(--color-ink-500);
+  --border: var(--color-ink-200);
+  --lcd-bg: var(--color-ink-900);
+  --lcd-fg: var(--color-lcd-400);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: var(--color-ink-950);
+  --surface: var(--color-ink-900);
+  --surface-2: var(--color-ink-800);
+  --text: var(--color-ink-100);
+  --text-muted: var(--color-ink-400);
+  --border: var(--color-ink-700);
+  --lcd-bg: #04140f;
+  --lcd-fg: var(--color-lcd-400);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background: var(--color-signal-400);
+  color: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus ring, consistent + visible */
+:focus-visible {
+  outline: 2px solid var(--color-signal-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* LCD-style result readout, the site's signature element */
+.lcd-panel {
+  background: var(--lcd-bg);
+  color: var(--lcd-fg);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  border-radius: var(--radius-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.lcd-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-signal-600);
+  color: white;
+  padding: 0.6rem 1rem;
+  z-index: 100;
+  border-radius: 0 0 0.5rem 0;
+}
+.skip-link:focus {
+  left: 0;
+}
