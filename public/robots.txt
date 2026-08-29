@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://irucalc.com/sitemap.xml
+Sitemap: https://irutech-calcora.netlify.app/sitemap.xml
