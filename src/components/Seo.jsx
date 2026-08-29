@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const SITE_URL = "https://calcora.com";
+const SITE_URL = "https://irutech-calcora.netlify.app/";
 const SITE_NAME = "Calcora";
 
 function setMeta(nameOrProp, content, isProperty = false) {
